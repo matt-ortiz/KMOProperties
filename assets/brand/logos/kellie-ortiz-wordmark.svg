@@ -1,0 +1,17 @@
+<svg width="520" height="150" viewBox="0 0 520 150" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Kellie Ortiz wordmark</title>
+  <desc id="desc">Elegant Kellie Ortiz real estate logo with KO monogram</desc>
+  <rect width="520" height="150" fill="transparent"/>
+  <g transform="translate(24 24)">
+    <circle cx="51" cy="51" r="49" stroke="#C69A4A" stroke-width="2.5"/>
+    <circle cx="51" cy="51" r="39" stroke="#A50067" stroke-width="1.2" opacity="0.55"/>
+    <path d="M28 75V27H36V49.5L58 27H68L47 48.6L70 75H59.8L41.5 53.5L36 59.1V75H28Z" fill="#07182B"/>
+    <path d="M64.5 76C52.2 76 43.5 66.7 43.5 51C43.5 35.3 52.2 26 64.5 26C76.8 26 85.5 35.3 85.5 51C85.5 66.7 76.8 76 64.5 76ZM64.5 67.9C72.2 67.9 77 61.7 77 51C77 40.3 72.2 34.1 64.5 34.1C56.8 34.1 52 40.3 52 51C52 61.7 56.8 67.9 64.5 67.9Z" fill="#A50067" opacity="0.96"/>
+  </g>
+  <g transform="translate(148 35)">
+    <text x="0" y="39" fill="#07182B" font-family="'Playfair Display', Georgia, serif" font-size="46" font-weight="700" letter-spacing="0">Kellie Ortiz</text>
+    <path d="M2 55H244" stroke="#C69A4A" stroke-width="2"/>
+    <text x="2" y="80" fill="#A50067" font-family="'Inter', Arial, sans-serif" font-size="13" font-weight="800" letter-spacing="4">REAL ESTATE</text>
+    <text x="143" y="80" fill="#687083" font-family="'Inter', Arial, sans-serif" font-size="13" font-weight="700" letter-spacing="3">VA | DC | MD</text>
+  </g>
+</svg>

@@ -1,0 +1,15 @@
+<svg width="520" height="150" viewBox="0 0 520 150" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Kellie Ortiz line mark logo</title>
+  <desc id="desc">Clean Kellie Ortiz logo with a subtle roofline</desc>
+  <rect width="520" height="150" fill="transparent"/>
+  <g transform="translate(31 34)">
+    <path d="M4 50L66 5L128 50" stroke="#C69A4A" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M24 48V92H108V48" stroke="#07182B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M55 92V64H77V92" stroke="#A50067" stroke-width="3" stroke-linejoin="round"/>
+  </g>
+  <g transform="translate(187 34)">
+    <text x="0" y="37" fill="#07182B" font-family="'Inter', Arial, sans-serif" font-size="14" font-weight="900" letter-spacing="5">KELLIE</text>
+    <text x="0" y="82" fill="#07182B" font-family="'Playfair Display', Georgia, serif" font-size="53" font-weight="700">Ortiz</text>
+    <text x="2" y="106" fill="#A50067" font-family="'Inter', Arial, sans-serif" font-size="12" font-weight="900" letter-spacing="4">REAL ESTATE ADVISOR</text>
+  </g>
+</svg>

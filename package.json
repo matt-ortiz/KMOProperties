@@ -1,0 +1,16 @@
+{
+  "name": "kellie-ortiz-static-site",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "fetch:listings": "node scripts/fetch-listings.mjs",
+    "serve": "python3 -m http.server 4173",
+    "test:e2e": "playwright test",
+    "test:e2e:headed": "playwright test --headed",
+    "test:e2e:ui": "playwright test --ui",
+    "screenshot": "playwright screenshot http://127.0.0.1:4173 /tmp/kmo-website.png"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.56.1"
+  }
+}

@@ -1,0 +1,12 @@
+<svg width="520" height="150" viewBox="0 0 520 150" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Kellie Ortiz monogram logo</title>
+  <desc id="desc">Kellie Ortiz logo with a bold KO monogram and luxury real estate styling</desc>
+  <rect width="520" height="150" fill="transparent"/>
+  <path d="M37 111V39L75 20L113 39V111H37Z" stroke="#C69A4A" stroke-width="3"/>
+  <path d="M37 39L75 20L113 39" stroke="#A50067" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="52" y="89" fill="#07182B" font-family="'Playfair Display', Georgia, serif" font-size="45" font-weight="700" letter-spacing="-1">KO</text>
+  <text x="150" y="62" fill="#07182B" font-family="'Playfair Display', Georgia, serif" font-size="42" font-weight="700">Kellie</text>
+  <text x="291" y="62" fill="#A50067" font-family="'Playfair Display', Georgia, serif" font-size="42" font-weight="700">Ortiz</text>
+  <text x="153" y="91" fill="#687083" font-family="'Inter', Arial, sans-serif" font-size="13" font-weight="800" letter-spacing="3.5">REALTOR  |  VIRGINIA  DC  MARYLAND</text>
+  <path d="M152 108H458" stroke="#C69A4A" stroke-width="2"/>
+</svg>

@@ -1,0 +1,16 @@
+<svg width="280" height="110" viewBox="0 0 280 110" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Kellie Ortiz KO mark with descriptor</title>
+  <desc id="desc">KO monogram mark with real estate service area descriptor, without the Kellie Ortiz wordmark</desc>
+  <rect width="280" height="110" fill="transparent"/>
+  <g transform="translate(10 12)">
+    <circle cx="43" cy="43" r="41" stroke="#C69A4A" stroke-width="2.4"/>
+    <circle cx="43" cy="43" r="32.5" stroke="#F7E8F1" stroke-width="1.2" opacity="0.48"/>
+    <path d="M24 65V22H31V42.2L50.7 22H59.4L40.6 41.3L61 65H52L35.4 45.4L31 50V65H24Z" fill="#FFFFFF"/>
+    <path d="M57.2 66C46.2 66 38.4 57.7 38.4 43C38.4 28.3 46.2 20 57.2 20C68.2 20 76 28.3 76 43C76 57.7 68.2 66 57.2 66ZM57.2 58.6C64 58.6 68.5 52.8 68.5 43C68.5 33.2 64 27.4 57.2 27.4C50.4 27.4 45.9 33.2 45.9 43C45.9 52.8 50.4 58.6 57.2 58.6Z" fill="#F7E8F1"/>
+  </g>
+  <g transform="translate(110 37)">
+    <path d="M0 0H116" stroke="#C69A4A" stroke-width="2"/>
+    <text x="0" y="25" fill="#F7E8F1" font-family="'Inter', Arial, sans-serif" font-size="12" font-weight="900" letter-spacing="4">REAL ESTATE</text>
+    <text x="0" y="46" fill="#DADDE4" font-family="'Inter', Arial, sans-serif" font-size="12" font-weight="800" letter-spacing="3">VA | DC | MD</text>
+  </g>
+</svg>
