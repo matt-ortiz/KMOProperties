@@ -47,7 +47,7 @@ test("home page renders and mobile menu opens", async ({ page, isMobile }) => {
 
   await page.goto("/", { waitUntil: "domcontentloaded" });
 
-  await expect(page).toHaveTitle(/Kellie Ortiz \| Realtor in VA, DC & MD/);
+  await expect(page).toHaveTitle(/Kellie Ortiz \| Northern Virginia, DC & Maryland Realtor/);
   await expect(page.getByRole("heading", { name: /Guiding your move across VA, DC & MD/ })).toBeVisible();
   await expect(page.getByRole("link", { name: "Start Your Move" })).toBeVisible();
   await expect(page.getByRole("heading", { name: "Fresh homes across the DMV" })).toBeVisible();
