@@ -32,9 +32,12 @@ test("home page renders and mobile menu opens", async ({ page, isMobile }) => {
     });
   });
 
-  let submittedContactBody = "";
+  let submittedContactRequest = {};
   await page.route("https://submit-form.com/gq3zCCD9Z", async (route) => {
-    submittedContactBody = route.request().postData() || "";
+    submittedContactRequest = {
+      body: route.request().postData() || "",
+      contentType: route.request().headers()["content-type"] || ""
+    };
     await route.fulfill({
       status: 200,
       contentType: "application/json",
@@ -88,8 +91,14 @@ test("home page renders and mobile menu opens", async ({ page, isMobile }) => {
   await page.getByRole("button", { name: "Send Message" }).click();
   await expect(page.locator("[data-form-note]")).toContainText("Thank you. Your message was sent");
   await expect(page).toHaveURL(/\/$/);
-  expect(submittedContactBody).toContain('name="email"');
-  expect(submittedContactBody).toContain("taylor@example.com");
+  expect(submittedContactRequest.contentType).toContain("application/json");
+  expect(JSON.parse(submittedContactRequest.body)).toEqual({
+    email: "taylor@example.com",
+    message: "I'd like a personal home valuation for 5721 Glamis Dr Alexandria VA 22315.",
+    move_type: "Selling",
+    name: "Taylor Client",
+    phone: "703-555-0199"
+  });
   await expect(page.getByRole("button", { name: "Send Message" })).toBeEnabled();
 
   if (isMobile) {

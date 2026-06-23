@@ -3,7 +3,7 @@ const menuToggle = document.querySelector(".menu-toggle");
 const navLinks = document.querySelectorAll(".site-nav a, .nav-cta");
 const year = document.querySelector("[data-year]");
 const contactForm = document.querySelector("[data-contact-form]");
-const formNote = document.querySelector("[data-form-note]");
+let formNote = document.querySelector("[data-form-note]");
 const valuationForm = document.querySelector("[data-valuation-form]");
 const valuationNote = document.querySelector("[data-valuation-note]");
 const personalCmaButton = document.querySelector("[data-personal-cma]");
@@ -163,14 +163,44 @@ const initListings = async () => {
 
 initListings();
 
-if (contactForm && formNote) {
+const ensureFormNote = () => {
+  if (formNote || !contactForm) return formNote;
+
+  formNote = document.createElement("p");
+  formNote.className = "form-note full";
+  formNote.dataset.formNote = "";
+  formNote.setAttribute("aria-live", "polite");
+  contactForm.append(formNote);
+
+  return formNote;
+};
+
+const getContactPayload = (form) => {
+  const payload = {};
+
+  new FormData(form).forEach((value, key) => {
+    if (key.startsWith("_")) return;
+
+    const fieldValue = typeof value === "string" ? value.trim() : value;
+    if (!fieldValue) return;
+
+    payload[key] = fieldValue;
+  });
+
+  return payload;
+};
+
+if (contactForm) {
   contactForm.addEventListener("submit", async (event) => {
+    const statusNote = ensureFormNote();
     const action = contactForm.getAttribute("action") || "";
     if (action.includes("YOUR_FORMSPARK_ID")) {
       event.preventDefault();
-      formNote.textContent = "Add your Formspark form ID in index.html to turn on delivery.";
-      formNote.classList.remove("is-success");
-      formNote.classList.add("is-warning");
+      if (statusNote) {
+        statusNote.textContent = "Add your Formspark form ID in index.html to turn on delivery.";
+        statusNote.classList.remove("is-success");
+        statusNote.classList.add("is-warning");
+      }
       return;
     }
 
@@ -181,8 +211,10 @@ if (contactForm && formNote) {
     const submitButton = contactForm.querySelector('button[type="submit"]');
     const originalButtonText = submitButton?.textContent || "Send Message";
 
-    formNote.textContent = "Sending your message...";
-    formNote.classList.remove("is-success", "is-warning");
+    if (statusNote) {
+      statusNote.textContent = "Sending your message...";
+      statusNote.classList.remove("is-success", "is-warning");
+    }
     contactForm.classList.add("is-submitting");
 
     if (submitButton) {
@@ -193,21 +225,26 @@ if (contactForm && formNote) {
     try {
       const response = await fetch(action, {
         method: "POST",
-        body: new FormData(contactForm),
         headers: {
+          "Content-Type": "application/json",
           Accept: "application/json"
-        }
+        },
+        body: JSON.stringify(getContactPayload(contactForm))
       });
 
       if (!response.ok) throw new Error(`Form returned ${response.status}`);
 
       contactForm.reset();
-      formNote.textContent = "Thank you. Your message was sent, and Kellie will follow up soon.";
-      formNote.classList.add("is-success");
+      if (statusNote) {
+        statusNote.textContent = "Thank you. Your message was sent, and Kellie will follow up soon.";
+        statusNote.classList.add("is-success");
+      }
     } catch (error) {
-      formNote.textContent =
-        "Something got in the way. Please call or email Kellie directly, and we will get this sorted out.";
-      formNote.classList.add("is-warning");
+      if (statusNote) {
+        statusNote.textContent =
+          "Something got in the way. Please call or email Kellie directly, and we will get this sorted out.";
+        statusNote.classList.add("is-warning");
+      }
     } finally {
       contactForm.classList.remove("is-submitting");
       if (submitButton) {
