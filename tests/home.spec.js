@@ -32,6 +32,16 @@ test("home page renders and mobile menu opens", async ({ page, isMobile }) => {
     });
   });
 
+  let submittedContactBody = "";
+  await page.route("https://submit-form.com/gq3zCCD9Z", async (route) => {
+    submittedContactBody = route.request().postData() || "";
+    await route.fulfill({
+      status: 200,
+      contentType: "application/json",
+      body: JSON.stringify({ ok: true })
+    });
+  });
+
   await page.goto("/", { waitUntil: "domcontentloaded" });
 
   await expect(page).toHaveTitle(/Kellie Ortiz \| Realtor in VA, DC & MD/);
@@ -71,6 +81,16 @@ test("home page renders and mobile menu opens", async ({ page, isMobile }) => {
   await expect(page.locator('textarea[name="message"]')).toHaveValue(
     "I'd like a personal home valuation for 5721 Glamis Dr Alexandria VA 22315."
   );
+
+  await page.getByPlaceholder("Full name").fill("Taylor Client");
+  await page.getByPlaceholder("Phone number").fill("703-555-0199");
+  await page.getByPlaceholder("Email address").fill("taylor@example.com");
+  await page.getByRole("button", { name: "Send Message" }).click();
+  await expect(page.locator("[data-form-note]")).toContainText("Thank you. Your message was sent");
+  await expect(page).toHaveURL(/\/$/);
+  expect(submittedContactBody).toContain('name="email"');
+  expect(submittedContactBody).toContain("taylor@example.com");
+  await expect(page.getByRole("button", { name: "Send Message" })).toBeEnabled();
 
   if (isMobile) {
     const menuButton = page.getByRole("button", { name: "Menu" });

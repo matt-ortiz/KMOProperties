@@ -164,12 +164,56 @@ const initListings = async () => {
 initListings();
 
 if (contactForm && formNote) {
-  contactForm.addEventListener("submit", (event) => {
+  contactForm.addEventListener("submit", async (event) => {
     const action = contactForm.getAttribute("action") || "";
     if (action.includes("YOUR_FORMSPARK_ID")) {
       event.preventDefault();
       formNote.textContent = "Add your Formspark form ID in index.html to turn on delivery.";
+      formNote.classList.remove("is-success");
       formNote.classList.add("is-warning");
+      return;
+    }
+
+    if (!contactForm.checkValidity()) return;
+
+    event.preventDefault();
+
+    const submitButton = contactForm.querySelector('button[type="submit"]');
+    const originalButtonText = submitButton?.textContent || "Send Message";
+
+    formNote.textContent = "Sending your message...";
+    formNote.classList.remove("is-success", "is-warning");
+    contactForm.classList.add("is-submitting");
+
+    if (submitButton) {
+      submitButton.disabled = true;
+      submitButton.textContent = "Sending...";
+    }
+
+    try {
+      const response = await fetch(action, {
+        method: "POST",
+        body: new FormData(contactForm),
+        headers: {
+          Accept: "application/json"
+        }
+      });
+
+      if (!response.ok) throw new Error(`Form returned ${response.status}`);
+
+      contactForm.reset();
+      formNote.textContent = "Thank you. Your message was sent, and Kellie will follow up soon.";
+      formNote.classList.add("is-success");
+    } catch (error) {
+      formNote.textContent =
+        "Something got in the way. Please call or email Kellie directly, and we will get this sorted out.";
+      formNote.classList.add("is-warning");
+    } finally {
+      contactForm.classList.remove("is-submitting");
+      if (submitButton) {
+        submitButton.disabled = false;
+        submitButton.textContent = originalButtonText;
+      }
     }
   });
 }
@@ -241,19 +285,44 @@ if (personalCmaButton && contactForm) {
   });
 }
 
+const COLLAPSED_TESTIMONIAL_HEIGHT = 178;
+let testimonialResizeTimer;
 
-document.querySelectorAll('.read-more-btn').forEach(btn => {
-  const p = btn.previousElementSibling;
+const initTestimonials = () => {
+  document.querySelectorAll(".testimonial-row article").forEach((article) => {
+    const quote = article.querySelector("p");
+    if (!quote) return;
 
-  // Hide button on short testimonials that don't need it
-  if (p.scrollHeight <= 175) {
-    btn.style.display = 'none';
-    return;
-  }
+    article.querySelector(".read-more-btn")?.remove();
+    quote.classList.remove("is-collapsible", "is-expanded");
 
-  btn.addEventListener('click', () => {
-    const isExpanded = p.classList.toggle('expanded');
-    btn.textContent = isExpanded ? 'Read less' : 'Read more';
+    if (quote.scrollHeight <= COLLAPSED_TESTIMONIAL_HEIGHT + 24) return;
+
+    quote.classList.add("is-collapsible");
+
+    const button = document.createElement("button");
+    button.className = "read-more-btn";
+    button.type = "button";
+    button.setAttribute("aria-expanded", "false");
+    button.textContent = "Read more";
+
+    quote.insertAdjacentElement("afterend", button);
+
+    button.addEventListener("click", () => {
+      const isExpanded = quote.classList.toggle("is-expanded");
+      button.setAttribute("aria-expanded", String(isExpanded));
+      button.textContent = isExpanded ? "Read less" : "Read more";
+    });
   });
-});
+};
 
+initTestimonials();
+
+if (document.fonts) {
+  document.fonts.ready.then(initTestimonials);
+}
+
+window.addEventListener("resize", () => {
+  window.clearTimeout(testimonialResizeTimer);
+  testimonialResizeTimer = window.setTimeout(initTestimonials, 150);
+});
