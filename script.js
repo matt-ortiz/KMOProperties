@@ -240,3 +240,20 @@ if (personalCmaButton && contactForm) {
     setTimeout(() => textarea?.focus(), 350);
   });
 }
+
+
+document.querySelectorAll('.read-more-btn').forEach(btn => {
+  const p = btn.previousElementSibling;
+
+  // Hide button on short testimonials that don't need it
+  if (p.scrollHeight <= 175) {
+    btn.style.display = 'none';
+    return;
+  }
+
+  btn.addEventListener('click', () => {
+    const isExpanded = p.classList.toggle('expanded');
+    btn.textContent = isExpanded ? 'Read less' : 'Read more';
+  });
+});
+

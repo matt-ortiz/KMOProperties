@@ -981,6 +981,57 @@ textarea {
   font-size: 13px;
 }
 
+
+/* ------ Claude's suggestion ----------------- */
+
+
+.testimonial-row p {
+  height: 185px;
+  overflow: hidden;
+  position: relative;
+  transition: height 0.3s ease;
+}
+
+.testimonial-row p.expanded {
+  height: auto;
+}
+
+.testimonial-row p::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 40px;
+  background: linear-gradient(transparent, #0d1b2a);
+  transition: opacity 0.3s ease;
+}
+
+.testimonial-row p.expanded::after {
+  opacity: 0;
+}
+
+.read-more-btn {
+  display: block;
+  background: none;
+  border: none;
+  color: #c9a84c;
+  cursor: pointer;
+  font-size: 0.85rem;
+  padding: 8px 0 0 0;
+  margin-top: 0;
+  text-decoration: none; /* ditch underline, use border instead */
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.read-more-btn:hover {
+  border-bottom-color: #c9a84c;
+  color: #e8c97a; /* slight lighten on hover */
+}
+
+
+
 .contact-section {
   display: grid;
   grid-template-columns: minmax(220px, 0.78fr) minmax(190px, 0.62fr) minmax(360px, 1.25fr);
